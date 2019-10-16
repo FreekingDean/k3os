@@ -13,6 +13,7 @@ import (
 	"github.com/rancher/mapper/convert"
 	merge2 "github.com/rancher/mapper/convert/merge"
 	"github.com/rancher/mapper/values"
+	"github.com/sirupsen/logrus"
 )
 
 const (
@@ -172,6 +173,7 @@ func readCmdline() (map[string]interface{}, error) {
 			value = strings.Trim(parts[1], `"`)
 		}
 		keys := strings.Split(strings.Trim(parts[0], `"`), ".")
+		logrus.Debugf("Key: %s | Value: %s", parts[0], value)
 		existing, ok := values.GetValue(data, keys...)
 		if ok {
 			switch v := existing.(type) {
